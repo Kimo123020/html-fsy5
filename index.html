@@ -2,188 +2,730 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>ملف فهد الفسيخ | التراث البحري السعودي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فهد الفسيخ | التراث البحري السعودي</title>
+    
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-color: #FDF5E6;
+            --bg-color: #FAF6F0;
+            --surface-color: #FFFFFF;
             --header-bg: #E3CAA5;
-            --accent-color: #FF7F50;
-            --text-primary: #3E2723;
+            --accent-color: #D96B27;
+            --accent-hover: #B85418;
+            --text-primary: #2C1810;
             --text-secondary: #5D4037;
             --highlight-color: #008080;
+            --border-color: #E2D7C7;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #12100E;
+            --surface-color: #1E1B18;
+            --header-bg: #2A241F;
+            --accent-color: #E87A38;
+            --accent-hover: #D96B27;
+            --text-primary: #F3EFEA;
+            --text-secondary: #B8AFA6;
+            --highlight-color: #4DB8B8;
+            --border-color: #332B24;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            line-height: 1.8;
+            transition: var(--transition);
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            color: var(--text-primary);
+        /* Navbar */
+        nav {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--box-shadow);
+            padding: 15px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        h1 {
-            text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            color: var(--text-secondary);
+        [data-theme="dark"] nav {
+            background-color: rgba(30, 27, 24, 0.85);
         }
 
-        h2 {
-            background-color: var(--header-bg);
-            padding: 10px;
-            border-radius: 8px;
-            border-right: 5px solid var(--accent-color);
-        }
-
-        ul {
-            list-style-type: none;
-            padding-right: 20px;
-        }
-
-        ul li {
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        ul li::before {
-            content: "🐟";
-            margin-left: 10px;
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
             color: var(--accent-color);
-        }
-
-        img.portfolio-image {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            margin: 20px auto;
-        }
-
-        hr {
-            border: 0;
-            height: 2px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--accent-color), rgba(0, 0, 0, 0));
-            margin: 30px 0;
-        }
-
-        a {
-            color: var(--highlight-color);
             text-decoration: none;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
         }
 
-        .rating {
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
             color: var(--accent-color);
-            direction: ltr;
-            unicode-bidi: bidi-override;
         }
 
-        footer {
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #theme-btn {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        #theme-btn:hover {
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        #google_translate_element {
+            background: var(--surface-color);
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Hero Section */
+        header {
+            margin-top: 100px;
+            padding: 70px 5% 40px;
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(217, 107, 39, 0.12);
+            color: var(--accent-color);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid rgba(217, 107, 39, 0.2);
+        }
+
+        header h1 {
+            font-size: 3.2rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        header h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
             color: var(--text-secondary);
+            max-width: 850px;
+            margin: 0 auto 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 30px auto;
+            display: block;
+            transition: var(--transition);
+            border: 4px solid var(--surface-color);
+            object-fit: cover;
+        }
+
+        .portfolio-image:hover {
+            transform: scale(1.02) translateY(-6px);
+        }
+
+        /* Stats Counter */
+        .stats-section {
+            background-color: var(--surface-color);
+            border-y: 1px solid var(--border-color);
+            padding: 40px 5%;
+            margin: 40px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            font-weight: 900;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        /* Sections */
+        section {
+            padding: 70px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--text-primary);
+            font-weight: 900;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent-color);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* Grid Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            padding: 35px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(217, 107, 39, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+        }
+
+        /* Rating Stars */
+        .rating {
+            color: #FFB800;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            display: flex;
+            gap: 4px;
+        }
+
+        /* FAQ Accordion */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 25px;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 200px;
+            padding: 0 25px 20px 25px;
+        }
+
+        .faq-item.active .faq-header i {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--accent-color);
+            color: #FFFFFF !important;
+            padding: 13px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(217, 107, 39, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(217, 107, 39, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary) !important;
+            border: 2px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(217, 107, 39, 0.05);
+            color: var(--accent-color) !important;
+        }
+
+        /* Floating Actions */
+        .floating-group {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            background-color: var(--highlight-color);
+            color: #FFFFFF;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 20px rgba(0, 128, 128, 0.35);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .floating-btn.whatsapp {
+            background-color: #25D366;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .hero-desc {
+                font-size: 1.05rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    
-<div id="google_translate_element" style="text-align: left; padding: 10px; background: #e3caa5;"></div>
-
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'ar', 
-    includedLanguages: 'en,ar',ru' 
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <h1>الملف التعريفي: فهد الفسيخ</h1>
-    
-    
-    <img src="fahd.jpg" alt="فهد بياع الفسيخ" class="portfolio-image"/>
-    <h3>
-    <ul>
-            <li>شاب سعودي من أبناء المنطقة الشرقية، شغوف بالبحر وخيرات الخليج. قررت أخذ الفسيخ والتراث البحري إلى مستوى جديد تماماً تجمع بين الأصالة الشعبية والجمال الحساوي والنظافة العالية.</li>
-            <li>نختص في إعداد وتمليح أجود أنواع سمك البوري والطبخ البحري بطريقة احترافية تضمن لك طعماً يعمّر الرأس وبدون زفارة، مع الحفاظ على أعلى معايير التعقيم والجودة من البحر للمائدة مباشرة.</li>
-    </h3>
-            <h2>نبذة عامة</h2>
-     <img src="skill2.jpg" alt="وليمة أكل الفسيخ والسمك" class="portfolio-image"/>
-
-    <h3>
-        <ul>
-            <li>خبير ومحب للتراث البحري، مكرس لتقديم أفضل تجربة فسيخ وسمك طازج، مع الحفاظ على الأصالة والذوق الرفيع.</li>
+    <!-- Header Navigation -->
+    <nav>
+        <a href="#" class="logo"><i class="fa-solid fa-fish-fins"></i> فهد الفسيخ</a>
+        <ul class="nav-links">
+            <li><a href="#about">نبذة عنا</a></li>
+            <li><a href="#experience">الخبرة</a></li>
+            <li><a href="#skills">المهارات</a></li>
+            <li><a href="#faq">الأسئلة الشائعة</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
         </ul>
-    </h3>
+        <div class="controls">
+            <button id="theme-btn" title="تغيير المظهر"><i class="fa-solid fa-moon"></i></button>
+            <div id="google_translate_element"></div>
+        </div>
+    </nav>
 
-    <hr>
+    <!-- Hero Section -->
+    <header id="about" class="reveal">
+        <span class="badge"><i class="fa-solid fa-certificate"></i> التراث البحري الأحسائي والأصيل</span>
+        <h1>أستاذ <span>الفسيخ والتراث البحري</span> في الشرقية</h1>
+        <p class="hero-desc">شاب سعودي من أبناء المنطقة الشرقية، شغوف بالبحر وخيرات الخليج. أخذنا الفسيخ والتراث البحري إلى مستوى جديد يجمع بين الأصالة الشعبية، والنظافة العالية، والمذاق الذي يعمّر الرأس بدون أي زفارة.</p>
+        
+        <div class="hero-buttons">
+            <a href="#contact" class="btn"><i class="fa-solid fa-cart-shopping"></i> اطلب الآن</a>
+            <a href="#experience" class="btn btn-outline"><i class="fa-solid fa-circle-info"></i> استكشف خبرتنا</a>
+        </div>
 
-    <h2>الخبرة في المأكولات البحرية</h2>
-    
-    
-    <img src="market.jpg" alt="سوق بيع الفسيخ والسمك" class="portfolio-image"/>
+        <img src="fahd.jpg" alt="فهد بياع الفسيخ" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80'"/>
+    </header>
 
-    <h3>
-        <ul>
-            <li>متخصص في تمليح وإعداد الفسيخ التقليدي بأعلى معايير الجودة والنظافة (2018 - حتى الآن).</li>
-            <li>خبير في اختيار أنواع السمك الطازج الأنسب للتمليح والفسخ.</li>
-            <li>إدارة وضمان جودة سلسلة التوريد من الصياد إلى المائدة.</li>
-        </ul>
-    </h3>
+    <!-- Stats Bar -->
+    <div class="stats-section reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>+2,500</h3>
+                <p>عميل سعيد</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>طازج وبدون زفارة</p>
+            </div>
+            <div class="stat-item">
+                <h3>+6 سنوات</h3>
+                <p>خبرة في التمليح والطهي</p>
+            </div>
+            <div class="stat-item">
+                <h3>⭐️ 4.9</h3>
+                <p>تقييم الجودة</p>
+            </div>
+        </div>
+    </div>
 
-    <hr>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">خبرتنا في المأكولات البحرية</h2>
+        
+        <div class="grid-container">
+            <div class="card reveal">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-anchor"></i></div>
+                    <h3>إعداد وتمليح احترافي</h3>
+                    <p>متخصصون في إعداد وتمليح سمك البوري والفسيخ التقليدي بأعلى معايير التعقيم والجودة من البحر للمائدة مباشرة.</p>
+                </div>
+            </div>
+            
+            <div class="card reveal">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-water"></i></div>
+                    <h3>انتقاء الأسماك الطازجة</h3>
+                    <p>خبرة دقيقة في اختيار أفضل أنواع السمك الطازج من حصاد الخليج العربي الأنسب للتمليح والفسخ.</p>
+                </div>
+                <img src="market.jpg" alt="سوق بيع الفسيخ" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80'" style="margin-top:20px;"/>
+            </div>
 
-    <h2>المهارات التراثية والولائم</h2>
-    
-    
-    <img src="eating.jpg" alt="وليمة أكل الفسيخ والسمك" class="portfolio-image"/>
+            <div class="card reveal">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>سلسلة توريد مضمونة</h3>
+                    <p>إدارة التوريد من مراكب الصيادين مباشرة حتى التغليف والشفط الهوائي للضمان الكامل للطزاجة والنظافة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h3>
-        <ul>
-            <li>تقييم جودة الفسيخ بالنظر والرائحة: <span class="rating">⭐️⭐️⭐️⭐️⭐️</span></li>
-            <li>فنون تقديم الفسيخ وتنسيق الولائم: <span class="rating">⭐️⭐️⭐️⭐️⭐️</span></li>
-            <li>مهارات طهي وتتبيل السمك المقلي والمشوي: <span class="rating">⭐️⭐️⭐️⭐️</span></li>
-        </ul>
-    </h3>
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">المهارات والولائم</h2>
+        <div class="grid-container">
+            <div class="card reveal">
+                <img src="eating.jpg" alt="وليمة أكل الفسيخ" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80'"/>
+                <h3>تقييم جودة الفسيخ</h3>
+                <p>فحص معيار درجة التمليح والنضج بالنظر والرائحة لضمان سلامة المنتج بنسبة 100%.</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
 
-    <hr>
-     
+            <div class="card reveal">
+                <img src="skill2.jpg" alt="تقديم الفسيخ" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80'"/>
+                <h3>تنسيق الولائم البحرية</h3>
+                <p>فنون تقديم المأكولات البحرية وتجهيز السفر التراثية بأسلوب راقٍ يشرّف في المناسبات.</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
 
-    <h2>الشهادات والاعتمادات</h2>
-    <img src="ea.jpg" alt="وليمة أكل الفسيخ والسمك" class="portfolio-image"/>
-    <h3>
-        <ul>
-            <li>شهادة "خبير الفسيخ المعتمد" — معهد تراث المأكولات البحرية السعودي</li>
-        </ul>
-    </h3>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                <h3>الطهي والتتبيل</h3>
+                <p>مهارات ممتازة في طهي الأسماك البحرية، المشوي والمقلي، بخلطات وتتبيلات خاصة تجعل الطعم يعمّر الرأس.</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <hr>
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2 class="section-title">الأسئلة الشائعة</h2>
+        <div class="faq-container reveal">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>كيف يتم تغليف الفسيخ للطلبات والمقاطعات البعيدة؟</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>يتم تغليف الفسيخ بتقنية التفرغ الهوائي (Vacuum Sealing) لحفظ الجودة والنظافة والمنع التام للروائح أثناء الشحن والتوصيل.</p>
+                </div>
+            </div>
 
-    <h2>تواصل واستكشف</h2>
-    <h3>
-        <ul>
-            <li><a href="https://dokkan-albalady.com/product/%D9%81%D8%B3%D9%8A%D8%AE-%D8%A7%D9%84%D8%B5%D9%8A%D8%A7%D8%AF-%D9%85%D8%BA%D9%84%D9%81/">تواصل معي للطلبات والاستشارات</a></li>
-      <li><a href="https://github.com/Kimo123020">خدمه  العملاء</a></li>
-        </ul>
-        </ul>
-    </h3>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>هل الفسيخ متوفر طوال العام؟</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>نعم، نوفر الفسيخ الطازج بشكل مستمر مع مراعاة مواسم أفضل أنواع سمك البوري للحفاظ على أعلى جودة.</p>
+                </div>
+            </div>
 
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>كيف يمكنني التوصية بطلب لوليمة أو مناسبة خاصة؟</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>يمكنك التواصل معنا مباشرة عبر الواتساب أو خدمة العملاء لتحديد الكميات وتجهيز الوليمة قبل موعد المناسبة بـ 48 ساعة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">تواصل واستكشف</h2>
+        <div class="grid-container">
+            <div class="card reveal" style="text-align: center;">
+                <div class="card-icon" style="margin: 0 auto 20px;"><i class="fa-solid fa-store"></i></div>
+                <h3>المتجر الإلكتروني</h3>
+                <p style="margin-bottom: 20px;">اطلب الفسيخ الطازج المغلف بأعلى جودة ليصلك أينما كنت.</p>
+                <a href="https://dokkan-albalady.com/product/%D9%81%D8%B3%D9%8A%D8%AE-%D8%A7%D9%84%D8%B5%D9%8A%D8%A7%D8%AF-%D9%85%D8%BA%D9%84%D9%81/" target="_blank" class="btn">زيارة المتجر</a>
+            </div>
+            
+            <div class="card reveal" style="text-align: center;">
+                <div class="card-icon" style="margin: 0 auto 20px;"><i class="fa-brands fa-github"></i></div>
+                <h3>الدعم الفني وخدمة العملاء</h3>
+                <p style="margin-bottom: 20px;">فريقنا جاهز للرد على جميع الاستفسارات ومتابعة الطلبات الخاصة.</p>
+                <a href="https://github.com/Kimo123020" target="_blank" class="btn btn-outline">تواصل معنا</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>@فهد الفسيخ. جميع الحقوق التراثية محفوظة.</p>
+        <p>&copy; 2026 فهد الفسيخ. جميع الحقوق محفوظة | التراث البحري السعودي</p>
     </footer>
 
+    <!-- Floating Action Group -->
+    <div class="floating-group">
+        <a href="https://dokkan-albalady.com" target="_blank" class="floating-btn whatsapp" title="تواصل عبر الواتساب">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="#about" class="floating-btn" title="العودة للأعلى">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ar', 
+                includedLanguages: 'en,ar,ru', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Page Scripts -->
+    <script>
+        // Dark Mode Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const icon = themeBtn.querySelector('i');
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // Scroll Reveal Logic
+        const reveals = document.querySelectorAll(".reveal");
+        function checkScroll() {
+            const triggerBottom = window.innerHeight * 0.88;
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < triggerBottom) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", checkScroll);
+        checkScroll();
+
+        // FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const header = item.querySelector('.faq-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
